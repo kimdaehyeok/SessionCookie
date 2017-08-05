@@ -1,18 +1,23 @@
 package com.session.cookie.handler;
 
-import java.net.Socket;
+import java.io.IOException;
 
-public class RequestHandler extends Thread
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+@WebServlet("/session")
+public class RequestHandler extends HttpServlet
 {
-    private Socket connection;
-    
-    public RequestHandler(Socket connection)
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        this.connection = connection;
-    }
-    
-    public void run()
-    {
+        String paramName = request.getParameter("name");
+        
+        
         
     }
 }

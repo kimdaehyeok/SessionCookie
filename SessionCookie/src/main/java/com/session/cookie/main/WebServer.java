@@ -1,33 +1,25 @@
 package com.session.cookie.main;
 
-import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
+import java.io.File;
 
-import com.session.cookie.handler.RequestHandler;
+import javax.servlet.ServletException;
 
-public class WebServer 
+import org.apache.catalina.LifecycleException;
+import org.apache.catalina.startup.Tomcat;
+
+public class WebServer
 {
-    private static int port = 8080;
-    
-    public static void main( String[] args )
+    public static void main(String[] args) throws ServletException, LifecycleException
     {
-        try
-        {
-            ServerSocket serverSocket = new ServerSocket(port);
-            Socket connection;
-            
-            while((connection = serverSocket.accept()) != null)
-            {
-                RequestHandler requestHandler = new RequestHandler(connection);
-                requestHandler.start();
-            }
-            
-        }
-        catch (IOException e)
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        String webappDirLocation = "webapp/";
+        
+        Tomcat tomcat = new Tomcat();
+        
+        tomcat.setPort(8080);
+        
+        tomcat.addWebapp("/", new File(webappDirLocation).getAbsolutePath());
+        
+        tomcat.start();
+        tomcat.getServer().await();
     }
 }
