@@ -17,17 +17,24 @@ public class LoginHandler extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        String getCookie = request.getCookies().toString();
-        System.out.println(HttpSessions.getHttpSessionByCookie(getCookie));
+        String getCookie = null;
+        
+        if(request.getCookies().toString() != null)
+        {
+            getCookie = request.getHeader("Cookie");
+        }
+        
+        System.out.println(getCookie);
         
         if(HttpSessions.getHttpSessionByCookie(getCookie) == null)
         {
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/jsp/login.jsp");
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/jsp/index.html");
             requestDispatcher.forward(request, response);
         }
         else
         {
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("/jsp/testSuccess.jsp");
+            requestDispatcher.forward(request, response);
         }
     }
 }

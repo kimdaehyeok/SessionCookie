@@ -27,15 +27,11 @@ public class RequestHandler extends HttpServlet
         
         if (paramName.equals(name1) && paramPass.equals(password1))
         {
-            if ((request.getHeader("Cookie") == null))
-            {
-                String jSessionid = UUID.randomUUID().toString();
-                response.addHeader("Set-Cookie","JSESSIONID="+ jSessionid);
-                HttpSessions.inputCookie(jSessionid, request.getSession());
-                System.out.println(jSessionid);
-            }
-            
             System.out.println((request.getHeader("Cookie")));
+            
+            HttpSessions.inputCookie(request.getHeader("Cookie"), request.getSession());
+            response.addHeader("Set-Cookie",request.getHeader("Cookie"));
+            
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("/jsp/success.jsp");
             requestDispatcher.forward(request, response);
         }
