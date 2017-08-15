@@ -27,7 +27,7 @@ public class RequestHandler extends HttpServlet
         
         if (paramName.equals(name1) && paramPass.equals(password1))
         {
-            System.out.println((request.getHeader("Cookie")));
+            System.out.println("GET HEADER : " + request.getHeader("Cookie"));
             
             HttpSessions.inputCookie(request.getHeader("Cookie"), request.getSession());
             response.addHeader("Set-Cookie",request.getHeader("Cookie"));

@@ -24,7 +24,7 @@ public class LoginHandler extends HttpServlet
             getCookie = request.getHeader("Cookie");
         }
         
-        System.out.println(getCookie);
+        System.out.println("GET COOKIE" + getCookie);
         
         if(HttpSessions.getHttpSessionByCookie(getCookie) == null)
         {
