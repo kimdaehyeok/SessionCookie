@@ -19,17 +19,13 @@ public class LoginHandler extends HttpServlet
     {
         String getCookie = null;
         
-        if(request.getCookies().toString() != null)
-        {
-            getCookie = request.getHeader("Cookie");
-        }
+        getCookie = request.getHeader("Cookie");
         
-        System.out.println("GET COOKIE" + getCookie);
+        System.out.println("GET COOKIE : " + getCookie);
         
         if(HttpSessions.getHttpSessionByCookie(getCookie) == null)
         {
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/jsp/index.html");
-            requestDispatcher.forward(request, response);
+            response.sendRedirect("/jsp/index.jsp");
         }
         else
         {
